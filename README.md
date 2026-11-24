@@ -1,6 +1,18 @@
-# BLE HCI Sensing
+# BLE CS IPT Sensing
 
-BLE 信道探测（CS）与方向估计（DF）数据的离线分析与算法验证项目。从原 BLE Host 上位机项目中拆分而来，保留 notebook 实验与数据处理核心模块。
+BLE 信道探测（Channel Sounding, CS）IPT 数据的离线处理、算法验证与论文底稿仓库。
+
+## 相关项目
+
+本仓库与固件、上位机配套使用。数据由芯片采集，经上位机记录后，在这里做后续分析和写作。
+
+| 项目 | 角色 | 配套 |
+|------|------|------|
+| 本仓库 | 数据处理、算法、论文底稿 | [blecs_IPT_sensing](https://github.com/cwdao/blecs_IPT_sensing) |
+| [nrf_Connect_SDK_try](https://github.com/cwdao/nrf_Connect_SDK_try) | nRF54L 底层固件。代码在芯片上运行，采集 CS 数据并上传到上位机 | 分支 `IPT_test` 下的 [331ipt_initiator](https://github.com/cwdao/nrf_Connect_SDK_try/tree/IPT_test/331ipt_initiator)、[331ipt_reflector](https://github.com/cwdao/nrf_Connect_SDK_try/tree/IPT_test/331ipt_reflector) |
+| [ble_host](https://github.com/cwdao/ble_host) | 上位机。采集数据、记录数据，并做初步可视化 | 4.4.0 及以上 |
+
+分析用的 notebook 与 `src/` 最初从 [ble_host](https://github.com/cwdao/ble_host) 拆出，当前与上表中的固件示例和 ble_host 4.4.0+ 一起使用。
 
 ## 项目结构
 
@@ -80,8 +92,4 @@ _env = init_notebook(project_root)
 
 ## 数据格式
 
-采集数据为 JSONL 格式，详见 [docs/jsonl_format.md](docs/jsonl_format.md)。
-
-## 与原 BLE Host 的关系
-
-本项目由原 [ble_host](https://github.com/cwdao/ble_host) 仓库的 `examples/` 目录及 notebook 依赖的 `src/` 模块拆分而来，不包含 GUI 上位机、串口通信与打包相关代码。
+采集数据为 JSONL 格式，详见 [docs/jsonl_format.md](docs/jsonl_format.md)。本仓库不包含上位机 GUI、串口通信与打包代码，这些在 [ble_host](https://github.com/cwdao/ble_host) 中。
